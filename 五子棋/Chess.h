@@ -56,5 +56,9 @@ private:
 	bool playerFlag;//现在该谁下棋，true:黑棋走，false:白棋走
 
 	void updateMap(ChessPos* pos);	//更新棋局的棋子分布
+
+	bool checkWin();	//如果胜负已分，返回true,否则返回true   
+
+	ChessPos lastPos;	//最近的落子点位置
 };
 

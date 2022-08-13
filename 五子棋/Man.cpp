@@ -1,4 +1,5 @@
 #include "Man.h"
+#include"Chess.h"
 
 void Man::init(Chess* chess)
 {

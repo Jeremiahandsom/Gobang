@@ -61,18 +61,19 @@ void AI::calculateScore()
 			if (chess->getChessData(row, col))	//如果该点已经有子则跳过
 				continue;
 
-			//八个方向
-			for (int y = -1; y <= 1; y++)
+			//各个方向
+			for (int y = -1; y <= 0; y++)
 			{
 				for (int x = -1; x <= 1; x++)
 				{
+					if (y == 0 && x == 0)
+						continue;
+					if (y == 0 && x != 1)		//由于下面会反向判断，这里只对(-1,-1)(-1,0)(1,0)(0,-1)四个方向判断
+						continue;
+
 					personNum = 0;
 					aiNum = 0;
 					emptyNum = 0;
-
-					if (y == 0 && x == 0)
-						continue;
-
 					//如果黑棋在此位置落子
 					for (int i = 1; i <= 4; i++)
 					{
