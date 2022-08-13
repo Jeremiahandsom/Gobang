@@ -6,7 +6,7 @@ using namespace std;
 int main()
 {
 	Man man;
-	Chess chess();
+	Chess chess(15,41,43,42);
 	AI ai;
 	ChessGame game(&man, &ai, &chess);
 

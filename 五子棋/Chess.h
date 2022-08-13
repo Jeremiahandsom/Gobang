@@ -8,6 +8,8 @@ struct ChessPos			//落子位置
 {
 	int row;
 	int col;
+
+	ChessPos(int r = 0, int c = 0) :row(r), col(c) {}
 };
 
 //棋色
@@ -52,5 +54,7 @@ private:
 	vector<vector<int>> chessMap;	//当前棋局的棋子分布数据：0：空， 1：黑子， -1：白子
 
 	bool playerFlag;//现在该谁下棋，true:黑棋走，false:白棋走
+
+	void updateMap(ChessPos* pos);	//更新棋局的棋子分布
 };
 
