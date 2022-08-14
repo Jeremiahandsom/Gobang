@@ -1,4 +1,5 @@
 #include "AI.h"
+#include"ChessGame.h"
 
 void AI::init(Chess* chess)
 {
@@ -20,7 +21,8 @@ void AI::go()
 {
 	ChessPos pos = think();
 	Sleep(1000);	//假装思考
-	chess->chessDown(&pos, Chess_White);
+	chess_kind_t t = chess->getPlayerFlag() ? Chess_Black : Chess_White;	//判断下哪种棋
+	chess->chessDown(&pos, t);
 }
 
 void AI::calculateScore()
@@ -211,6 +213,22 @@ ChessPos AI::think()
 	vector<ChessPos>maxPoints;
 	int maxScore = 0;
 	int size = chess->getGradeSize();
+
+	//ai先手下中间
+	bool AiFirst = true;
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			if (chess->getChessData(i, j) != 0)
+			{
+				AiFirst = false;
+				break;
+			}
+		}
+	}
+	if(AiFirst)
+		return ChessPos(size / 2, size / 2);
 
 	//找到所有最大值，放入maxPoints
 	for (int row = 0; row < size; row++)

@@ -9,6 +9,7 @@ ChessGame::ChessGame(Man* man, AI* ai, Chess* chess)
 	ai->init(chess);
 }
 
+//渲染透明背景的putimage
 void putimagePNG1(int x, int y, IMAGE* picture) //x为载入图片的X坐标，y为Y坐标
 {
 	// 变量初始化
@@ -52,30 +53,55 @@ void ChessGame::play()
 	loadimage(0, "res/menu.png",0,0,true);  //开始菜单
 
 	MOUSEMSG msg;
+	bool playerFirst = true;
 	while (1)
 	{
 		loadimage(0, "res/menu.png", 0, 0, true);  //开始菜单
 		msg = GetMouseMsg();
 
 		//人机对战
-		if (msg.uMsg == WM_LBUTTONDOWN&&msg.x>133&&msg.x<319&&msg.y>243&&msg.y<330)
+		if (msg.uMsg == WM_LBUTTONDOWN && msg.x > 133 && msg.x < 319 && msg.y>243 && msg.y < 330)
 		{
 			loadimage(0, "res/人机对战.png", 0, 0, true);
 			Sleep(500);
 			chess->init();
-			while (1)
+			if (playerFirst)
 			{
-				//先由棋手下棋
-				man->go();
-				if (chess->checkOver())
+				while (1)
 				{
-					break;
-				}
+					//先由棋手下棋
+					man->go();
+					if (chess->checkOver())
+					{
+						playerFirst = true;
+						break;
+					}
 
-				ai->go();
-				if (chess->checkOver())
+					ai->go();
+					if (chess->checkOver())
+					{
+						playerFirst = !playerFirst;
+						break;
+					}
+				}
+			}
+			else
+			{
+				while (1)
 				{
-					break;
+					ai->go();
+					if (chess->checkOver())
+					{
+						playerFirst = false;
+						break;
+					}
+
+					man->go();
+					if (chess->checkOver())
+					{
+						playerFirst = true;
+						break;
+					}
 				}
 			}
 		}
@@ -93,12 +119,6 @@ void ChessGame::play()
 				{
 					break;
 				}
-
-				/*ai->go();
-				if (chess->checkOver())
-				{
-					break;
-				}*/
 			}
 		}
 	}
