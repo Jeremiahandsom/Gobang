@@ -43,6 +43,8 @@ public:
 	//检查棋局是否结束
 	bool checkOver();			
 
+	bool getPlayerFlag();
+
 private:
 	IMAGE chessBlackImg;
 	IMAGE chessWhiteImg;

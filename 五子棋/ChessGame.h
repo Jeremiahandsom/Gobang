@@ -14,5 +14,8 @@ private:
 	Man* man;
 	AI* ai;
 	Chess* chess;
+
+	IMAGE chessBlackImg;
+	IMAGE chessWhiteImg;
 };
 

@@ -4,7 +4,7 @@
 #include<conio.h>
 #pragma comment(lib,"winmm.lib")    //音乐播放
 
-//渲染透明背景的putimage
+
 void putimagePNG(int x, int y, IMAGE* picture) //x为载入图片的X坐标，y为Y坐标
 {
     // 变量初始化
@@ -198,11 +198,13 @@ bool Chess::checkOver()
         Sleep(1500);
         if (playerFlag == false)    //刚才下棋的是黑棋（玩家） 赢
         {
+            initgraph(897, 895, EW_SHOWCONSOLE);
             mciSendString("play res/不错.mp3", 0, 0, 0);
             loadimage(0, "res/胜利.jpg");
         }
         else
         {
+            initgraph(897, 895, EW_SHOWCONSOLE);
             mciSendString("play res/失败.mp3", 0, 0, 0);
             loadimage(0, "res/失败.jpg");
         }
@@ -211,6 +213,11 @@ bool Chess::checkOver()
         return true;
     }
     return false;
+}
+
+bool Chess::getPlayerFlag()
+{
+    return playerFlag;
 }
 
 void Chess::updateMap(ChessPos* pos)

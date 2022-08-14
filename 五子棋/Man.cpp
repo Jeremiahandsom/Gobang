@@ -24,5 +24,7 @@ void Man::go()
 
 	//printf("%d,%d\n", pos.row, pos.col);
 
-	chess->chessDown(&pos, Chess_Black);	//бДвс
+	chess_kind_t t =  chess->getPlayerFlag() ? Chess_Black : Chess_White;
+
+	chess->chessDown(&pos, t);	//бДвс
 }
