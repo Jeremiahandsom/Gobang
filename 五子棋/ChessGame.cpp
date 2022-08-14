@@ -121,5 +121,13 @@ void ChessGame::play()
 				}
 			}
 		}
+
+		if (msg.uMsg == WM_LBUTTONDOWN && msg.x > 417 && msg.x < 531 && msg.y>493 && msg.y < 594)
+		{
+			loadimage(0, "res/ÍË³ö.png", 0, 0, true);
+			Sleep(500);
+			closegraph();
+			break;
+		}
 	}
 }

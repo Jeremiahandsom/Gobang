@@ -1,6 +1,6 @@
 #include "AI.h"
 #include"ChessGame.h"
-
+#include<iostream>
 void AI::init(Chess* chess)
 {
 	this->chess = chess;
@@ -17,12 +17,14 @@ void AI::init(Chess* chess)
 	}
 }
 
+chess_kind_t AiChessKind;		//AI的下棋种类
+
 void AI::go()
 {
+	AiChessKind = chess->getPlayerFlag() ? Chess_Black : Chess_White;
 	ChessPos pos = think();
-	Sleep(1000);	//假装思考
-	chess_kind_t t = chess->getPlayerFlag() ? Chess_Black : Chess_White;	//判断下哪种棋
-	chess->chessDown(&pos, t);
+	Sleep(1000);	//假装思考//判断下哪种棋
+	chess->chessDown(&pos, AiChessKind);
 }
 
 void AI::calculateScore()
@@ -54,6 +56,8 @@ void AI::calculateScore()
 	int aiNum = 0;		//ai（白棋）有多少个连续的棋子
 	int emptyNum = 0;	//该方向上空白位的个数
 
+	//std::cout << AiChessKind;
+
 	//对每个点进行计算
 	for (int row = 0; row < size; row++)
 	{
@@ -76,13 +80,13 @@ void AI::calculateScore()
 					personNum = 0;
 					aiNum = 0;
 					emptyNum = 0;
-					//如果黑棋在此位置落子
+					//如果玩家在此位置落子
 					for (int i = 1; i <= 4; i++)
 					{
 						int curRow = row + i * y;
 						int curCol = col + i * x;
 
-						if (curRow >= 0 && curRow < size && curCol >= 0 && curCol < size && chess->getChessData(curRow, curCol) == 1)
+						if (curRow >= 0 && curRow < size && curCol >= 0 && curCol < size && chess->getChessData(curRow, curCol) == -AiChessKind)
 							personNum++;
 						else if (curRow >= 0 && curRow < size && curCol >= 0 && curCol < size && chess->getChessData(curRow, curCol) == 0)
 						{
@@ -92,13 +96,13 @@ void AI::calculateScore()
 						else break;
 					}
 
-					//黑棋在反方向计算
+					//玩家在反方向计算
 					for (int i = 1; i <= 4; i++)
 					{
 						int curRow = row - i * y;
 						int curCol = col - i * x;
 
-						if (curRow >= 0 && curRow < size && curCol >= 0 && curCol < size && chess->getChessData(curRow, curCol) == 1)
+						if (curRow >= 0 && curRow < size && curCol >= 0 && curCol < size && chess->getChessData(curRow, curCol) == -AiChessKind)
 							personNum++;
 						else if (curRow >= 0 && curRow < size && curCol >= 0 && curCol < size && chess->getChessData(curRow, curCol) == 0)
 						{
@@ -140,14 +144,14 @@ void AI::calculateScore()
 						scoreMap[row][col] += 20000;
 					}
 
-					//如果白棋在此位置落子
+					//如果AI在此位置落子
 					emptyNum = 0;
 					for (int i = 1; i <= 4; i++)
 					{
 						int curRow = row + i * y;
 						int curCol = col + i * x;
 
-						if (curRow >= 0 && curRow < size && curCol >= 0 && curCol < size && chess->getChessData(curRow, curCol) == -1)
+						if (curRow >= 0 && curRow < size && curCol >= 0 && curCol < size && chess->getChessData(curRow, curCol) == AiChessKind)
 							aiNum++;
 						else if (curRow >= 0 && curRow < size && curCol >= 0 && curCol < size && chess->getChessData(curRow, curCol) == 0)
 						{
@@ -157,13 +161,13 @@ void AI::calculateScore()
 						else break;
 					}
 
-					//白棋在反方向计算
+					//AI在反方向计算
 					for (int i = 1; i <= 4; i++)
 					{
 						int curRow = row - i * y;
 						int curCol = col - i * x;
 
-						if (curRow >= 0 && curRow < size && curCol >= 0 && curCol < size && chess->getChessData(curRow, curCol) == -1)
+						if (curRow >= 0 && curRow < size && curCol >= 0 && curCol < size && chess->getChessData(curRow, curCol) == AiChessKind)
 							aiNum++;
 						else if (curRow >= 0 && curRow < size && curCol >= 0 && curCol < size && chess->getChessData(curRow, curCol) == 0)
 						{
