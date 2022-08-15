@@ -37,6 +37,15 @@ void ChessGame::play()
 				{
 					//先由棋手下棋
 					man->go();
+
+					//返回主菜单
+					if (chess->getExitFlag())
+					{
+						chess->buttonDown(502, 634, 150, 35, "返回主菜单");
+						Sleep(500);
+						break;
+					}
+
 					if (chess->checkOver())
 					{
 						playerFirst = true;
@@ -63,6 +72,15 @@ void ChessGame::play()
 					}
 
 					man->go();
+
+					//返回主菜单
+					if (chess->getExitFlag())
+					{
+						chess->buttonDown(502, 634, 150, 35, "返回主菜单");
+						Sleep(500);
+						break;
+					}
+
 					if (chess->checkOver())
 					{
 						playerFirst = true;
@@ -82,6 +100,15 @@ void ChessGame::play()
 			while (1)
 			{
 				man->go();
+
+				//返回主菜单
+				if (chess->getExitFlag())
+				{
+					chess->buttonDown(502, 634, 150, 35, "返回主菜单");
+					Sleep(500);
+					break;
+				}
+
 				if (chess->checkOver())
 				{
 					break;

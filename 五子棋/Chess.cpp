@@ -86,6 +86,8 @@ void Chess::init()
     }
 
     playerFlag = true;
+
+    exitFlag = false;
 }
 
 bool Chess::clickBoard(int x, int y, ChessPos* pos)
@@ -99,6 +101,10 @@ bool Chess::clickBoard(int x, int y, ChessPos* pos)
 
     int len;
     bool ret = false;
+
+    //超出棋盘边界时无效
+    if (x > (gradeSize - 1) * chessSize + margin_x + offset || y > (gradeSize - 1) * chessSize + margin_y + offset)
+        return false;
 
     do {
         //左上角的判断
@@ -225,11 +231,35 @@ bool Chess::getPlayerFlag()
     return playerFlag;
 }
 
+bool Chess::getExitFlag()
+{
+    return exitFlag;
+}
+
+void Chess::exitToMenu()
+{
+    exitFlag = !exitFlag;
+}
+
 void Chess::updateMap(ChessPos* pos)
 {
     lastPos = *pos;
     chessMap[pos->row][pos->col] = playerFlag ? Chess_Black : Chess_White;
     playerFlag = !playerFlag;   //黑白方交换
+}
+
+void Chess::buttonDown(int x, int y, int w, int h, const char* str)
+{
+    setbkmode(TRANSPARENT);     //文字背景透明
+    setfillcolor(BLACK);
+    fillroundrect(x, y, x + w, y + h, 10, 10);      //绘制按钮
+
+    settextstyle(25, 0, "黑体");
+
+    //文字居中
+    int tx = x + (w - textwidth(str)) / 2;
+    int ty = y + (h - textheight(str)) / 2;
+    outtextxy(tx, ty, str);
 }
 
 bool Chess::checkWin()

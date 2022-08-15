@@ -20,11 +20,20 @@ void Man::go()
 		{
 			break;
 		}
+
+		//点击“返回主菜单按钮”
+		else if (msg.uMsg == WM_LBUTTONDOWN && msg.x >= 502 && msg.x <= 652 && msg.y >= 634 && msg.y <= 669)
+		{
+			chess->exitToMenu();
+			break;
+		}
 	}
 
-	//printf("%d,%d\n", pos.row, pos.col);
+	
+	if (chess->getExitFlag()==false)		//如果返回主菜单了就不下棋
+	{
+		chess_kind_t ManChessKind = chess->getPlayerFlag() ? Chess_Black : Chess_White;
 
-	chess_kind_t ManChessKind =  chess->getPlayerFlag() ? Chess_Black : Chess_White;
-
-	chess->chessDown(&pos, ManChessKind);	//落子
+		chess->chessDown(&pos, ManChessKind);	//落子
+	}
 }

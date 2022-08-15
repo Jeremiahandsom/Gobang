@@ -46,6 +46,11 @@ public:
 
 	bool getPlayerFlag();
 
+	bool getExitFlag();
+
+	void exitToMenu();		//回到主菜单 （将exitFlag置为true)
+
+	void buttonDown(int x, int y, int w, int h, const char* str);	//创建按钮
 private:
 	IMAGE chessBlackImg;
 	IMAGE chessWhiteImg;
@@ -65,5 +70,7 @@ private:
 	ChessPos lastPos;	//最近的落子点位置
 
 	void button(int x, int y, int w, int h, const char* str);	//创建按钮
+
+	bool exitFlag = false;	//是否退出
 };
 
