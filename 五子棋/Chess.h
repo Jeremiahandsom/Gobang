@@ -1,6 +1,7 @@
 #pragma once
 #include<graphics.h>	//easyx头文件
 #include<vector>
+#include <string>
 
 using namespace std;
 
@@ -62,5 +63,7 @@ private:
 	bool checkWin();	//如果胜负已分，返回true,否则返回true   
 
 	ChessPos lastPos;	//最近的落子点位置
+
+	void button(int x, int y, int w, int h, const char* str);	//创建按钮
 };
 

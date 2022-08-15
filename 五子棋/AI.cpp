@@ -17,7 +17,6 @@ void AI::init(Chess* chess)
 	}
 }
 
-chess_kind_t AiChessKind;		//AI的下棋种类
 
 void AI::go()
 {

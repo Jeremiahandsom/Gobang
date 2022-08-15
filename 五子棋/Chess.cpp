@@ -4,7 +4,7 @@
 #include<conio.h>
 #pragma comment(lib,"winmm.lib")    //音乐播放
 
-
+//渲染透明背景的putimage
 void putimagePNG(int x, int y, IMAGE* picture) //x为载入图片的X坐标，y为Y坐标
 {
     // 变量初始化
@@ -63,9 +63,14 @@ Chess::Chess(int gradeSize, int marginX, int marginY, float chessSize)
 
 void Chess::init()
 {
-    initgraph(672, 672, EW_SHOWCONSOLE);    //创建游戏窗口
+    initgraph(672, 672);    //创建游戏窗口
     loadimage(0, "res/棋盘4.png");   //显示棋盘图片
     mciSendString("play res/start.wav", 0, 0, 0);   //播放开始提示音
+
+    //加载按键
+    button(40, 634, 80, 35, "悔棋");
+    button(270, 634, 80, 35, "认输");
+    button(502, 634, 150, 35, "返回主菜单");
 
     //加载棋子
     loadimage(&chessBlackImg, "res/black.png", chessSize, chessSize, true);
@@ -196,15 +201,15 @@ bool Chess::checkOver()
     if (checkWin())
     {
         Sleep(1500);
-        if (playerFlag == false)    //刚才下棋的是黑棋（玩家） 赢
+        if (playerFlag == false)    //刚才下棋的是黑棋 赢
         {
-            initgraph(897, 895, EW_SHOWCONSOLE);
+            initgraph(897, 895);
             mciSendString("play res/不错.mp3", 0, 0, 0);
             loadimage(0, "res/胜利.jpg");
         }
         else
         {
-            initgraph(897, 895, EW_SHOWCONSOLE);
+            initgraph(897, 895);
             mciSendString("play res/失败.mp3", 0, 0, 0);
             loadimage(0, "res/失败.jpg");
         }
@@ -278,5 +283,19 @@ bool Chess::checkWin()
     }
 
     return false;
+}
+
+void Chess::button(int x, int y, int w, int h, const char* str)
+{
+    setbkmode(TRANSPARENT);     //文字背景透明
+    setfillcolor(BROWN);        
+    fillroundrect(x, y, x + w, y + h, 10, 10);      //绘制按钮
+
+    settextstyle(25, 0, "黑体");
+
+    //文字居中
+    int tx = x + (w - textwidth(str)) / 2;
+    int ty = y + (h - textheight(str)) / 2;
+    outtextxy(tx, ty, str);
 }
 
