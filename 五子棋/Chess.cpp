@@ -88,6 +88,7 @@ void Chess::init()
     playerFlag = true;
 
     exitFlag = false;
+    admitDefeat = false;
 }
 
 bool Chess::clickBoard(int x, int y, ChessPos* pos)
@@ -260,6 +261,16 @@ void Chess::buttonDown(int x, int y, int w, int h, const char* str)
     int tx = x + (w - textwidth(str)) / 2;
     int ty = y + (h - textheight(str)) / 2;
     outtextxy(tx, ty, str);
+}
+
+bool Chess::getAdmitDefeat()
+{
+    return admitDefeat;
+}
+
+void Chess::selfDefeat()
+{
+    admitDefeat = !admitDefeat;
 }
 
 bool Chess::checkWin()

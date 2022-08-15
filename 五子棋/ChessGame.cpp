@@ -1,4 +1,5 @@
 #include "ChessGame.h"
+#include<conio.h>
 
 ChessGame::ChessGame(Man* man, AI* ai, Chess* chess)
 {
@@ -46,6 +47,13 @@ void ChessGame::play()
 						break;
 					}
 
+					//»œ ‰
+					if (chess->getAdmitDefeat())
+					{
+						selfLose();
+						break;
+					}
+
 					if (chess->checkOver())
 					{
 						playerFirst = true;
@@ -81,6 +89,13 @@ void ChessGame::play()
 						break;
 					}
 
+					//»œ ‰
+					if (chess->getAdmitDefeat())
+					{
+						selfLose();
+						break;
+					}
+
 					if (chess->checkOver())
 					{
 						playerFirst = true;
@@ -109,6 +124,13 @@ void ChessGame::play()
 					break;
 				}
 
+				//»œ ‰
+				if (chess->getAdmitDefeat())
+				{
+					selfLose();
+					break;
+				}
+
 				if (chess->checkOver())
 				{
 					break;
@@ -126,4 +148,14 @@ void ChessGame::play()
 			break;
 		}
 	}
+}
+
+void ChessGame::selfLose()
+{
+	chess->buttonDown(270, 634, 80, 35, "»œ ‰");
+	Sleep(500);
+	initgraph(897, 895);
+	mciSendString("play res/ ß∞‹.mp3", 0, 0, 0);
+	loadimage(0, "res/ ß∞‹.jpg");
+	_getch();
 }

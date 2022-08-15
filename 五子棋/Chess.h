@@ -51,6 +51,10 @@ public:
 	void exitToMenu();		//回到主菜单 （将exitFlag置为true)
 
 	void buttonDown(int x, int y, int w, int h, const char* str);	//创建按钮
+
+	bool getAdmitDefeat();	//获取admitDefeat
+
+	void selfDefeat();		//认输
 private:
 	IMAGE chessBlackImg;
 	IMAGE chessWhiteImg;
@@ -72,5 +76,7 @@ private:
 	void button(int x, int y, int w, int h, const char* str);	//创建按钮
 
 	bool exitFlag = false;	//是否退出
+
+	bool admitDefeat;	//是否认输
 };
 

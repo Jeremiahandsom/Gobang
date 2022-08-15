@@ -17,5 +17,7 @@ private:
 
 	IMAGE chessBlackImg;
 	IMAGE chessWhiteImg;
+
+	void selfLose();	//хойДаВЁл
 };
 
