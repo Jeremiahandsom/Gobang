@@ -90,6 +90,9 @@ void Chess::init()
 
     exitFlag = false;
     admitDefeat = false;
+
+    manLastPos.row = -1;
+    manLastPos.col = -1;
 }
 
 bool Chess::clickBoard(int x, int y, ChessPos* pos)
@@ -285,7 +288,13 @@ void Chess::regret()
     IMAGE img;
     loadimage(&img, "res/棋盘4.png");
 
-    if (manLastPos.row == lastPos.row&&manLastPos.col==lastPos.col)
+    if (manLastPos.row == -1 && manLastPos.col == -1)
+    {
+        HWND window = GetHWnd();	//获取窗口句柄
+        MessageBox(window, "您还未下棋，不可悔棋", "警告", MB_OK);
+    }
+
+    else if (manLastPos.row == lastPos.row&&manLastPos.col==lastPos.col)
     {
         chessMap[manLastPos.row][manLastPos.col] = 0;
         int x = margin_x + chessSize * manLastPos.col - 0.5 * chessSize;  // 棋子左上角坐标

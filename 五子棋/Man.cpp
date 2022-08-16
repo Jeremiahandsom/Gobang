@@ -94,3 +94,8 @@ void Man::go()
 	}
 }
 
+void Man::resetRegretNum()
+{
+	regretNum = 0;
+}
+

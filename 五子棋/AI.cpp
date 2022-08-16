@@ -22,7 +22,7 @@ void AI::go()
 {
 	AiChessKind = chess->getPlayerFlag() ? Chess_Black : Chess_White;
 	ChessPos pos = think();
-	Sleep(1000);	//假装思考//判断下哪种棋
+	Sleep(600);	//假装思考
 	chess->chessDown(&pos, AiChessKind);
 }
 

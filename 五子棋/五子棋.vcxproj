@@ -142,6 +142,7 @@
     <ClCompile Include="AI.cpp" />
     <ClCompile Include="Chess.cpp" />
     <ClCompile Include="ChessGame.cpp" />
+    <ClCompile Include="DoubleGame.cpp" />
     <ClCompile Include="Man.cpp" />
     <ClCompile Include="源.cpp" />
   </ItemGroup>
@@ -149,6 +150,7 @@
     <ClInclude Include="AI.h" />
     <ClInclude Include="Chess.h" />
     <ClInclude Include="ChessGame.h" />
+    <ClInclude Include="DoubleGame.h" />
     <ClInclude Include="Man.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
