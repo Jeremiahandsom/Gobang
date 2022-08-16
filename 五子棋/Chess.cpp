@@ -1,4 +1,5 @@
 #include "Chess.h"
+#include "ChessGame.h"
 #include<math.h>
 #include<mmsystem.h>;
 #include<conio.h>
@@ -181,7 +182,8 @@ void Chess::chessDown(ChessPos* pos, chess_kind_t kind)
     {
         putimagePNG(x, y, &chessWhiteImg);
     }
-    else {
+    else 
+    {
         putimagePNG(x, y, &chessBlackImg);
     }
 
@@ -271,6 +273,37 @@ bool Chess::getAdmitDefeat()
 void Chess::selfDefeat()
 {
     admitDefeat = !admitDefeat;
+}
+
+void Chess::updateManLastPos(ChessPos pos)
+{
+    manLastPos = pos;
+}
+
+void Chess::regret()
+{
+    IMAGE img;
+    loadimage(&img, "res/ÆåÅÌ4.png");
+
+    if (manLastPos.row == lastPos.row&&manLastPos.col==lastPos.col)
+    {
+        chessMap[manLastPos.row][manLastPos.col] = 0;
+        int x = margin_x + chessSize * manLastPos.col - 0.5 * chessSize;  // Æå×Ó×óÉÏ½Ç×ø±ê
+        int y = margin_y + chessSize * manLastPos.row - 0.5 * chessSize;
+        putimage(x, y, chessSize, chessSize, &img, x, y, SRCCOPY);
+        playerFlag = !playerFlag;
+    }
+    else
+    {
+        chessMap[manLastPos.row][manLastPos.col] = 0;
+        chessMap[lastPos.row][lastPos.col] = 0;
+        int x = margin_x + chessSize * manLastPos.col - 0.5 * chessSize;  // Æå×Ó×óÉÏ½Ç×ø±ê
+        int y = margin_y + chessSize * manLastPos.row - 0.5 * chessSize;
+        int x1 = margin_x + chessSize * lastPos.col - 0.5 * chessSize; 
+        int y1 = margin_y + chessSize * lastPos.row - 0.5 * chessSize;
+        putimage(x, y, chessSize, chessSize, &img, x, y, SRCCOPY);
+        putimage(x1, y1, chessSize, chessSize, &img, x1, y1, SRCCOPY);
+    }
 }
 
 bool Chess::checkWin()

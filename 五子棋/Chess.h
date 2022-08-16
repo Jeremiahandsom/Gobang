@@ -55,6 +55,10 @@ public:
 	bool getAdmitDefeat();	//获取admitDefeat
 
 	void selfDefeat();		//认输
+
+	void updateManLastPos(ChessPos pos);
+
+	void regret();		//悔棋
 private:
 	IMAGE chessBlackImg;
 	IMAGE chessWhiteImg;
@@ -72,6 +76,7 @@ private:
 	bool checkWin();	//如果胜负已分，返回true,否则返回true   
 
 	ChessPos lastPos;	//最近的落子点位置
+	ChessPos manLastPos;	//玩家的最近落子位置
 
 	void button(int x, int y, int w, int h, const char* str);	//创建按钮
 

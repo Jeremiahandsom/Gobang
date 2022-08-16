@@ -17,15 +17,62 @@ void Man::go()
 		//点击“返回主菜单按钮”
 		if (msg.uMsg == WM_LBUTTONDOWN && msg.x >= 502 && msg.x <= 652 && msg.y >= 634 && msg.y <= 669)
 		{
-			chess->exitToMenu();
-			break;
+			mciSendString("play res/select.mp3", 0, 0, 0);
+			HWND window = GetHWnd();	//获取窗口句柄
+			int isBack = MessageBox(window, "是否确认返回主菜单", "提示", MB_OKCANCEL);
+			if (isBack == IDOK)
+			{
+				mciSendString("play res/select.mp3", 0, 0, 0);
+				chess->exitToMenu();
+				break;
+			}
+			else if (isBack == IDCANCEL)
+			{
+				mciSendString("play res/select.mp3", 0, 0, 0);
+			}
 		}
 
 		//点击认输按钮
 		else if (msg.uMsg == WM_LBUTTONDOWN && msg.x >= 270 && msg.x <= 350 && msg.y >= 634 && msg.y <= 669)
 		{
-			chess->selfDefeat();
-			break;
+			mciSendString("play res/select.mp3", 0, 0, 0);
+			HWND window = GetHWnd();	//获取窗口句柄
+			int isSelfDefeat = MessageBox(window, "是否确认认输", "提示", MB_OKCANCEL);
+			if (isSelfDefeat == IDOK)
+			{
+				mciSendString("play res/select.mp3", 0, 0, 0);
+				chess->selfDefeat();
+				break;
+			}
+			else if(isSelfDefeat==IDCANCEL)
+			{
+				mciSendString("play res/select.mp3", 0, 0, 0);
+			}
+		}
+
+		//点击悔棋按钮
+		else if (msg.uMsg == WM_LBUTTONDOWN && msg.x >= 40 && msg.x <= 120 && msg.y >= 634 && msg.y <= 669)
+		{
+			mciSendString("play res/select.mp3", 0, 0, 0);
+			HWND window = GetHWnd();	//获取窗口句柄
+			if (regretNum < 3)
+			{
+				int isRegret = MessageBox(window, "是否确认悔棋", "提示", MB_OKCANCEL);
+				if (isRegret == IDOK)
+				{
+					mciSendString("play res/select.mp3", 0, 0, 0);
+					chess->regret();
+					regretNum++;
+				}
+				else if (isRegret == IDCANCEL)
+				{
+					mciSendString("play res/select.mp3", 0, 0, 0);
+				}
+			}
+			else
+			{
+				MessageBox(window, "您已悔棋超过3次，不可继续悔棋", "警告", MB_OK);
+			}
 		}
 
 		//通过chess对象，调用判断落子是否有效
@@ -42,5 +89,8 @@ void Man::go()
 		chess_kind_t ManChessKind = chess->getPlayerFlag() ? Chess_Black : Chess_White;
 
 		chess->chessDown(&pos, ManChessKind);	//落子
+
+		chess->updateManLastPos(pos);	//记录玩家最近落子位置
 	}
 }
+
