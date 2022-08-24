@@ -1,5 +1,6 @@
 #include "DoubleGame.h"
 #include <conio.h>
+#include<graphics.h>
 
 DoubleGame::DoubleGame(Man* man1, Man* man2, Chess* chess)
 {
@@ -21,7 +22,6 @@ void DoubleGame::play()
 		//返回主菜单
 		if (chess->getExitFlag())
 		{
-			chess->buttonDown(502, 634, 150, 35, "返回主菜单");
 			Sleep(500);
 			break;
 		}
@@ -43,7 +43,6 @@ void DoubleGame::play()
 
 		if (chess->getExitFlag())
 		{
-			chess->buttonDown(502, 634, 150, 35, "返回主菜单");
 			Sleep(500);
 			break;
 		}
@@ -70,3 +69,4 @@ void DoubleGame::selfLose()
 	loadimage(0, "res/失败.jpg");
 	_getch();
 }
+

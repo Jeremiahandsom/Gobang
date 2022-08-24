@@ -32,7 +32,6 @@ void ChessGame::play()
 				if (chess->getExitFlag())
 				{
 					backToMenu = true;
-					chess->buttonDown(502, 634, 150, 35, "返回主菜单");
 					Sleep(500);
 					break;
 				}
@@ -78,7 +77,6 @@ void ChessGame::play()
 				if (chess->getExitFlag())
 				{
 					backToMenu = true;
-					chess->buttonDown(502, 634, 150, 35, "返回主菜单");
 					Sleep(500);
 					break;
 				}
@@ -106,7 +104,6 @@ void ChessGame::play()
 
 void ChessGame::selfLose()
 {
-	chess->buttonDown(270, 634, 80, 35, "认输");
 	Sleep(500);
 	initgraph(897, 895);
 	mciSendString("play res/失败.mp3", 0, 0, 0);

@@ -50,6 +50,8 @@ public:
 
 	void exitToMenu();		//回到主菜单 （将exitFlag置为true)
 
+	void button(int x, int y, int w, int h, const char* str);	//创建按钮
+
 	void buttonDown(int x, int y, int w, int h, const char* str);	//创建按钮
 
 	bool getAdmitDefeat();	//获取admitDefeat
@@ -77,8 +79,6 @@ private:
 
 	ChessPos lastPos;	//最近的落子点位置
 	ChessPos manLastPos;	//玩家的最近落子位置
-
-	void button(int x, int y, int w, int h, const char* str);	//创建按钮
 
 	bool exitFlag = false;	//是否退出
 

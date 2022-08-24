@@ -302,6 +302,7 @@ void Chess::regret()
         putimage(x, y, chessSize, chessSize, &img, x, y, SRCCOPY);
         playerFlag = !playerFlag;
     }
+
     else
     {
         chessMap[manLastPos.row][manLastPos.col] = 0;
